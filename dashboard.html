@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - VitalLog</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heartbeat"></i> VitalLog</h1>
+            <nav>
+                <a href="/dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/metrics.html"><i class="fas fa-chart-line"></i> Metrics</a>
+                <button id="logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </nav>
+        </header>
+
+        <main id="dashboard-content">
+            <section class="health-overview">
+                <h2><i class="fas fa-clipboard-check"></i> Health Overview</h2>
+                <div class="summary-cards">
+                    <div class="card">
+                        <div class="metric-icon">
+                            <i class="fas fa-weight"></i>
+                        </div>
+                        <h3>Weight</h3>
+                        <div class="summary-value" id="weight-summary">Loading...</div>
+                        <div class="trend-indicator" id="weight-trend"></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="metric-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Blood Pressure</h3>
+                        <div class="summary-value" id="bp-summary">Loading...</div>
+                        <div class="trend-indicator" id="bp-trend"></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="metric-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Blood Sugar</h3>
+                        <div class="summary-value" id="sugar-summary">Loading...</div>
+                        <div class="trend-indicator" id="sugar-trend"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="health-trends">
+                <h2><i class="fas fa-chart-line"></i> Health Trends</h2>
+                <div class="chart-controls">
+                    <select id="chart-metric" class="chart-select">
+                        <option value="Weight">Weight (kg)</option>
+                        <option value="Blood Pressure">Blood Pressure (mmHg)</option>
+                        <option value="Blood Sugar">Blood Sugar (mg/dL)</option>
+                    </select>
+                    <select id="chart-period" class="chart-select">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30" selected>Last 30 Days</option>
+                        <option value="90">Last 90 Days</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="health-trend-chart"></canvas>
+                </div>
+                <div id="chart-trend-indicator" class="trend-indicator">
+                    <span id="chart-trend-value">Loading trend...</span>
+                </div>
+            </section>
+
+            <section class="quick-actions">
+                <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                <div class="actions">
+                    <a href="/metrics.html" class="button">
+                        <i class="fas fa-list"></i> View All Metrics
+                    </a>
+                    <a href="/metrics.html?add=new" class="button primary">
+                        <i class="fas fa-plus"></i> Add New Reading
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading dashboard...</p>
+            </div>
+        </div>
+
+        <div id="error-message" class="error-message"></div>
+    </div>
+    <script src="/static/js/dashboard.js"></script>
+    <script src="/static/js/common.js"></script>
+</body>
+
+</html>

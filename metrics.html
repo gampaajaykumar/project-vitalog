@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Metrics - VitalLog</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heartbeat"></i> VitalLog</h1>
+            <nav>
+                <a href="/dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/metrics.html" class="active"><i class="fas fa-chart-line"></i> My Metrics</a>
+                <button id="logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </nav>
+        </header>
+        <main>
+            <div class="metrics-header">
+                <h2><i class="fas fa-chart-line"></i> My Health Metrics</h2>
+                <button id="add-metric" class="primary"><i class="fas fa-plus"></i> Add New Reading</button>
+            </div>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="metric-type"><i class="fas fa-filter"></i> Metric Type</label>
+                    <select id="metric-type">
+                        <option value="">All Types</option>
+                        <option value="Weight">Weight</option>
+                        <option value="Blood Pressure">Blood Pressure</option>
+                        <option value="Blood Sugar">Blood Sugar</option>
+                        <option value="Heart Rate">Heart Rate</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="date-from"><i class="fas fa-calendar-alt"></i> From</label>
+                    <input type="date" id="date-from">
+                </div>
+                <div class="filter-group">
+                    <label for="date-to"><i class="fas fa-calendar-alt"></i> To</label>
+                    <input type="date" id="date-to">
+                </div>
+                <div class="filter-group">
+                    <label for="sort"><i class="fas fa-sort"></i> Sort</label>
+                    <select id="sort">
+                        <option value="desc">Newest First</option>
+                        <option value="asc">Oldest First</option>
+                    </select>
+                </div>
+                <button id="apply-filters"><i class="fas fa-check"></i> Apply Filters</button>
+            </div>
+
+            <div class="metric-summary">
+                <h3 id="summary-title"><i class="fas fa-info-circle"></i> Latest Reading</h3>
+                <div id="summary-value">Select a metric type to see latest reading</div>
+            </div>
+
+            <div class="metrics-list" id="metrics-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading your health metrics...</p>
+                </div>
+            </div>
+
+            <!-- Add/Edit Metric Modal -->
+            <div class="modal" id="metric-modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="modal-title"><i class="fas fa-plus"></i> Add New Metric Reading</h2>
+                    <form id="metric-form">
+                        <input type="hidden" id="metric-id">
+                        <div class="form-group">
+                            <label for="form-metric-type"><i class="fas fa-tag"></i> Metric Type</label>
+                            <select id="form-metric-type" required>
+                                <option value="">Select Type</option>
+                                <option value="Weight">Weight</option>
+                                <option value="Blood Pressure">Blood Pressure</option>
+                                <option value="Blood Sugar">Blood Sugar</option>
+                                <option value="Heart Rate">Heart Rate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-value"><i class="fas fa-hashtag"></i> Value</label>
+                            <input type="number" step="0.01" id="form-value" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-unit"><i class="fas fa-ruler"></i> Unit</label>
+                            <input type="text" id="form-unit" required value="kg">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-recorded-at"><i class="fas fa-calendar-alt"></i> Date & Time</label>
+                            <input type="datetime-local" id="form-recorded-at" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-notes"><i class="fas fa-sticky-note"></i> Notes (Optional)</label>
+                            <textarea id="form-notes" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="primary"><i class="fas fa-save"></i> Save</button>
+                            <button type="button" id="cancel-metric"><i class="fas fa-times"></i> Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/metrics.js"></script>
+    <script src="/static/js/common.js"></script>
+</body>
+
+</html>
